@@ -1,8 +1,0 @@
-com\tattooservice\resources\implimantations\GetAllArtWorkDelegate.class
-com\tattooservice\resources\implimantations\GetArtWorkByIdDelegate.class
-com\tattooservice\resources\constants\Constants.class
-com\tattooservice\resources\implimantations\GetBookingAdminDelegate.class
-com\tattooservice\resources\implimantations\GetAllArtistDelegate.class
-com\tattooservice\resources\implimantations\GetArtistByIdDelegate.class
-com\tattooservice\resources\configs\TattooDelegateConfig.class
-com\tattooservice\resources\implimantations\BookingRequestDelegate.class

@@ -1,4 +1,0 @@
-com\tattooservice\persistence\repository\IUserRepository.class
-com\tattooservice\persistence\repository\UserRepository.class
-com\tattooservice\persistence\configs\RepoConfig.class
-com\tattooservice\persistence\dto\UserDTO.class
