@@ -1,0 +1,9 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/com/tattooservice/api/ApiApi.java
+src/main/java/com/tattooservice/api/ApiUtil.java
+src/main/java/com/tattooservice/model/Artist.java
+src/main/java/com/tattooservice/model/Artwork.java
+src/main/java/com/tattooservice/model/Booking.java
+src/main/java/com/tattooservice/model/BookingRequest.java

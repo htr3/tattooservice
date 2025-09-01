@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  title: Art Gallery API
+  description: API documentation for the Art Gallery booking system.
+  version: 1.0.0
+servers:
+- url: http://localhost:3000
+  description: Local development server
+paths:
+  /api/artists:
+    get:
+      tags:
+      - Artists
+      summary: List all artists
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artist'
+        "500":
+          description: Internal Server Error
+  /api/artists/{id}:
+    get:
+      tags:
+      - Artists
+      summary: Get artist details
+      parameters:
+      - name: id
+        in: path
+        description: Artist ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        "404":
+          description: Artist not found
+        "500":
+          description: Internal Server Error
+  /api/artworks:
+    get:
+      tags:
+      - Artworks
+      summary: List all artworks
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artwork'
+        "500":
+          description: Internal Server Error
+  /api/artworks/{id}:
+    get:
+      tags:
+      - Artworks
+      summary: Get artwork details
+      parameters:
+      - name: id
+        in: path
+        description: Artwork ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artwork'
+        "404":
+          description: Artwork not found
+        "500":
+          description: Internal Server Error
+  /api/bookings:
+    get:
+      tags:
+      - Bookings (Admin)
+      summary: View all booking requests
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+    post:
+      tags:
+      - Bookings
+      summary: Create booking/contact request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+        required: true
+      responses:
+        "201":
+          description: Booking created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        "400":
+          description: Invalid request body
+        "500":
+          description: Internal Server Error
+components:
+  schemas:
+    Artist:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        bio:
+          type: string
+        artworks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artwork'
+    Artwork:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        artistId:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+    BookingRequest:
+      required:
+      - mobile
+      - message
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        message:
+          type: string
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        phone:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
