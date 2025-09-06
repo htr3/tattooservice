@@ -1,4 +1,4 @@
-package com.tattooservice.persistence.repository;
+package com.tattooservice.persistence.repository.jpa;
 
 import com.tattooservice.persistence.dto.BookingsDTO;
 import org.springframework.data.jpa.repository.JpaRepository;

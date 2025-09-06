@@ -1,11 +1,8 @@
-package com.tattooservice.services.repository.dto.interfaces;
+package com.tattooservice.services.business.dao.interfaces;
 
-import java.io.Serializable;
 import java.time.Instant;
 
-public interface  IBookingsDTO {
-
-
+public interface IBookingServiceDao {
     public String getName() ;
 
     public void setName(String name) ;
@@ -27,5 +24,4 @@ public interface  IBookingsDTO {
     public String getMessage() ;
 
     public void setMessage(String message) ;
-
 }

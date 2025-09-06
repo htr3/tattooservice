@@ -2,6 +2,8 @@ package com.tattooservice.resources.implimantations;
 
 import com.tattooservice.model.Artwork;
 import com.tattooservice.ms.api.implementations.TattoArtistController;
+import com.tattooservice.resources.mappers.interfaces.IArtworkDelegeteMapper;
+import com.tattooservice.services.business.dao.interfaces.IArtworkServiceDao;
 import com.tattooservice.services.business.interfaces.IGetAllArtWorkServiceImpl;
 import com.tattooservice.services.factory.interfaces.IProductOrderModelFactory;
 import com.tattooservice.services.models.interfaces.IContext;
@@ -20,6 +22,9 @@ public class GetAllArtWorkDelegate implements TattoArtistController.IGetAllArtWo
     @Inject
     private IGetAllArtWorkServiceImpl getAllArtWorkService;
 
+    @Inject
+    private IArtworkDelegeteMapper artworkMapper;
+
     private static final String ALL_ARTWORK = "allArtwork";
 
     @Override
@@ -27,8 +32,10 @@ public class GetAllArtWorkDelegate implements TattoArtistController.IGetAllArtWo
 
         IContext context = productOrderModelFactory.getContext();
 
-        getAllArtWorkService.getAllArtWorkApplication(context);
+        List<IArtworkServiceDao> artworkServiceDaos = getAllArtWorkService.getAllArtWorkApplication(context);
 
-        return null;
+        List<Artwork> artworks = artworkMapper.map(artworkServiceDaos);
+
+        return ResponseEntity.ok(artworks);
     }
 }

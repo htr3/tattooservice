@@ -24,11 +24,11 @@ public class BookingRequestServiceImpl implements IBookingRequestServiceImpl {
         bookingsDTO.setMessage(context.getValue("message"));
 
         // 1. if user present or not
-        if (userServiceRepository.getUserPersistence(context.getValue("mobile")).isPresent()) {
-            userServiceRepository.updateUserPersistence(bookingsDTO);
-        } else {
+//        if (userServiceRepository.getUserPersistence(context.getValue("mobile")).isPresent()) {
+//            userServiceRepository.updateUserPersistence(bookingsDTO);
+//        } else {
             IBookingsDTO userDTO1 = userServiceRepository.createUser(bookingsDTO);
-        }
+//        }
     }
 
 }

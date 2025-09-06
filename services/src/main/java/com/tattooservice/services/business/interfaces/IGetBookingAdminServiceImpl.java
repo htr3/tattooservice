@@ -1,7 +1,10 @@
 package com.tattooservice.services.business.interfaces;
 
+import com.tattooservice.services.business.dao.interfaces.IBookingServiceDao;
 import com.tattooservice.services.models.interfaces.IContext;
 
+import java.util.List;
+
 public interface IGetBookingAdminServiceImpl {
-    public void GetBookingAdminApplication(IContext context);
+    public List<IBookingServiceDao> GetBookingAdminApplication(IContext context);
 }

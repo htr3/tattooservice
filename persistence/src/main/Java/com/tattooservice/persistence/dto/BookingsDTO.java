@@ -1,19 +1,19 @@
 package com.tattooservice.persistence.dto;
 
 import com.tattooservice.services.repository.dto.interfaces.IBookingsDTO;
-import com.tattooservice.services.repository.dto.interfaces.IUserDTO;
 import jakarta.persistence.*;
 
 import java.time.Instant;
 
 @Entity
-@Table(name = "bookings", uniqueConstraints = {
+@Table(name = "booking", uniqueConstraints = {
         @UniqueConstraint(columnNames = "phone")
 })
 public class BookingsDTO implements IBookingsDTO {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    @Column(name = "id", nullable = false, updatable = false)
+    private String id;
 
     private String name;
 
@@ -25,6 +25,19 @@ public class BookingsDTO implements IBookingsDTO {
 
     private Instant updatedAt;
 
+
+    public BookingsDTO(String id, String name, String message, String phone, Instant createdAt, Instant updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.message = message;
+        this.phone = phone;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public BookingsDTO() {
+
+    }
 
     public Instant getUpdatedAt() {
         return updatedAt;
@@ -43,11 +56,11 @@ public class BookingsDTO implements IBookingsDTO {
     }
 
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

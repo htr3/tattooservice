@@ -10,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import jakarta.inject.Inject;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 
 @Component
 public class BookingRequestDelegate implements TattoArtistController.IBookingRequestDelegate{
@@ -33,6 +37,21 @@ public class BookingRequestDelegate implements TattoArtistController.IBookingReq
 
         bookingRequestService.bookingRequestServiceApp(context);
 
-        return null;
+        Booking booking = bookingMapper(bookingRequest.getName(), bookingRequest.getPhone(),bookingRequest.getMessage());
+
+        return ResponseEntity.ok(booking);
+
+    }
+
+    private Booking bookingMapper(String name, String phone, String message) {
+
+        Booking booking  = new Booking();
+
+        booking.setMessage(message);
+        booking.setName(name);
+        booking.setPhone(phone);
+        booking.setCreatedAt(Instant.now().atOffset(ZoneOffset.UTC));
+
+        return booking;
     }
 }

@@ -1,6 +1,7 @@
 package com.tattooservice.persistence.dto;
 
 
+import com.tattooservice.services.repository.dto.interfaces.IArtworksDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -8,11 +9,11 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 
 @Entity
-@Table(name = "artworks")
-public class ArtworksDTO {
+@Table(name = "artwork")
+public class ArtworksDTO implements IArtworksDTO {
 
     @Id
-    private Long id;
+    private String id;
 
     private String title;
 
@@ -24,11 +25,24 @@ public class ArtworksDTO {
 
     private Instant createdAt;
 
-    public Long getId() {
+
+    public ArtworksDTO(String id, String title, String artistId, String descreption, String image, Instant createdAt) {
+        this.id = id;
+        this.title = title;
+        this.artistId = artistId;
+        this.descreption = descreption;
+        this.image = image;
+        this.createdAt = createdAt;
+    }
+
+    public ArtworksDTO() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

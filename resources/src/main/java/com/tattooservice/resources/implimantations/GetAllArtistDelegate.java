@@ -4,6 +4,9 @@ import com.tattooservice.model.Artist;
 import com.tattooservice.model.Artwork;
 import com.tattooservice.model.BookingRequest;
 import com.tattooservice.ms.api.implementations.TattoArtistController;
+import com.tattooservice.services.business.dao.implemantations.ArtistServiceDao;
+import com.tattooservice.services.business.dao.interfaces.IArtistServiceDao;
+import com.tattooservice.services.business.dao.interfaces.IArtworkServiceDao;
 import com.tattooservice.services.business.interfaces.IGetAllArtistServiceImpl;
 import com.tattooservice.services.factory.interfaces.IProductOrderModelFactory;
 import com.tattooservice.services.models.interfaces.IContext;
@@ -31,9 +34,45 @@ public class GetAllArtistDelegate implements TattoArtistController.IGetAllArtist
         // call to service
         IContext context = productOrderModelFactory.getContext();
 
-        getAllArtistService.getAllArtistApplication(context);
+        List<IArtistServiceDao> artists = getAllArtistService.getAllArtistApplication(context);
 
-        return ResponseEntity.ok(dummydata());
+        List<Artist> artists1 = map(artists);
+        return ResponseEntity.ok(artists1);
+    }
+
+    private List<Artist> map(List<IArtistServiceDao> artistsService) {
+
+        List<Artist> artists = new ArrayList<>();
+
+
+        for(IArtistServiceDao artistServiceDao : artistsService) {
+            Artist artist = new Artist();
+
+
+            artist.setId(artistServiceDao.getId());
+            artist.setBio(artistServiceDao.getBio());
+            artist.setId(artistServiceDao.getId());
+            artist.setName(artistServiceDao.getName());
+
+            List<Artwork> artworks = new ArrayList<>();
+            Artwork artwork = new Artwork();
+
+            List<IArtworkServiceDao> artistServiceDaos = artistServiceDao.getArtworks();
+            for(IArtworkServiceDao artworkServiceDao : artistServiceDaos) {
+                artwork.setArtistId(artworkServiceDao.getArtistId());
+                artwork.setId(artistServiceDao.getId());
+                artwork.setDescription(artworkServiceDao.getDescription());
+                artwork.setTitle(artworkServiceDao.getTitle());
+                artwork.setImageUrl(artworkServiceDao.getImageUrl());
+                artworks.add(artwork);
+            }
+
+            artist.addArtworksItem(artwork);
+            artists.add(artist);
+
+        }
+
+        return artists;
     }
 
     private List<Artist> dummydata() {
